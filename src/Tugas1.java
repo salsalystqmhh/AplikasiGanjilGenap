@@ -1,4 +1,6 @@
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /*
@@ -17,23 +19,27 @@ public class Tugas1 extends javax.swing.JFrame {
      */
     public Tugas1() {
         initComponents();
-         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                char c = evt.getKeyChar();
-                if (!Character.isDigit(c)) {
-                    evt.consume();
-                }
-            }
-        });
+     jTextField1.addKeyListener(new KeyAdapter() {
+    @Override
+    public void keyTyped(KeyEvent evt) {
+        char c = evt.getKeyChar(); 
+        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+            evt.consume(); // Mencegah input non-angka
+            JOptionPane.showMessageDialog(null, "Hanya angka yang diperbolehkan!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+});
 
-        jLabel1.addFocusListener(new java.awt.event.FocusAdapter() {
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1.setText("");
-                jLabel2.setText("");
-            }
-        });
+    jLabel1.addKeyListener(new KeyAdapter() {
+    @Override
+    public void keyTyped(KeyEvent evt) {
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE) {
+            evt.consume(); // Mencegah input non-angka
+            JOptionPane.showMessageDialog(null, "Hanya angka yang diperbolehkan!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+});
     }
 
     /**
@@ -147,20 +153,25 @@ public class Tugas1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
-            int angka = Integer.parseInt(jTextField1.getText());
-            String hasil = (angka % 2 == 0) ? "Angka " + angka + " adalah Genap" : "Angka " + angka + " adalah Ganjil";
 
-            if (isPrima(angka)) {
-                hasil += " dan Bilangan Prima.";
-            } else {
-                hasil += " dan Bukan Bilangan Prima.";
-            }
-
-            JOptionPane.showMessageDialog(this, hasil, "Hasil", JOptionPane.INFORMATION_MESSAGE);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Harap masukkan angka yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
+    try {
+        int angka = Integer.parseInt(jTextField1.getText()); // Mengambil input angka
+        
+        // Pesan pertama: Ganjil/Genap
+        String hasil = (angka % 2 == 0) ? "Angka " + angka + " adalah Genap." : "Angka " + angka + " adalah Ganjil.";
+        JOptionPane.showMessageDialog(this, hasil, "Hasil Ganjil/Genap", JOptionPane.INFORMATION_MESSAGE);
+        
+        // Pesan kedua: Bilangan Prima
+        if (isPrima(angka)) {
+            JOptionPane.showMessageDialog(this, "Angka " + angka + " adalah Bilangan Prima.", "Hasil Bilangan Prima", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Angka " + angka + " bukan Bilangan Prima.", "Hasil Bilangan Prima", JOptionPane.INFORMATION_MESSAGE);
         }
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Harap masukkan angka yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
