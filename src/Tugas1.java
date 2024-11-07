@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -10,10 +13,27 @@
 public class Tugas1 extends javax.swing.JFrame {
 
     /**
-     * Creates new form Tugas1
+     * Creates new form Tugas
      */
     public Tugas1() {
         initComponents();
+         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                char c = evt.getKeyChar();
+                if (!Character.isDigit(c)) {
+                    evt.consume();
+                }
+            }
+        });
+
+        jLabel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField1.setText("");
+                jLabel2.setText("");
+            }
+        });
     }
 
     /**
@@ -59,6 +79,11 @@ public class Tugas1 extends javax.swing.JFrame {
         jLabel1.setText("Masukkan Angka");
 
         jButton2.setText("Keluar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -122,8 +147,43 @@ public class Tugas1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+         try {
+            int angka = Integer.parseInt(jTextField1.getText());
+            String hasil = (angka % 2 == 0) ? "Angka " + angka + " adalah Genap" : "Angka " + angka + " adalah Ganjil";
+
+            if (isPrima(angka)) {
+                hasil += " dan Bilangan Prima.";
+            } else {
+                hasil += " dan Bukan Bilangan Prima.";
+            }
+
+            JOptionPane.showMessageDialog(this, hasil, "Hasil", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Harap masukkan angka yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+         int confirm = JOptionPane.showConfirmDialog(
+                null,
+                "Apakah Anda yakin ingin keluar?",
+                "Konfirmasi Keluar",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+        );
+
+        if (confirm == JOptionPane.YES_OPTION) {
+            System.exit(0); // Menutup aplikasi
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+          // Metode untuk memeriksa apakah bilangan prima
+        private boolean isPrima(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
 
     /**
      * @param args the command line arguments
@@ -153,10 +213,8 @@ public class Tugas1 extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Tugas1().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Tugas1().setVisible(true);
         });
     }
 
