@@ -153,25 +153,24 @@ public class Tugas1 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+    int angka = Integer.parseInt(jTextField1.getText()); // Mengambil input angka
 
-    try {
-        int angka = Integer.parseInt(jTextField1.getText()); // Mengambil input angka
-        
-        // Pesan pertama: Ganjil/Genap
-        String hasil = (angka % 2 == 0) ? "Angka " + angka + " adalah Genap." : "Angka " + angka + " adalah Ganjil.";
-        JOptionPane.showMessageDialog(this, hasil, "Hasil Ganjil/Genap", JOptionPane.INFORMATION_MESSAGE);
-        
-        // Pesan kedua: Bilangan Prima
-        if (isPrima(angka)) {
-            JOptionPane.showMessageDialog(this, "Angka " + angka + " adalah Bilangan Prima.", "Hasil Bilangan Prima", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Angka " + angka + " bukan Bilangan Prima.", "Hasil Bilangan Prima", JOptionPane.INFORMATION_MESSAGE);
-        }
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Harap masukkan angka yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
+    // Pesan pertama: Ganjil/Genap
+    String hasil = (angka % 2 == 0) ? "Angka " + angka + " adalah Genap." : "Angka " + angka + " adalah Ganjil.";
+
+    // Pesan kedua: Bilangan Prima
+    if (isPrima(angka)) {
+        hasil += "\nAngka " + angka + " adalah Bilangan Prima.";
+    } else {
+        hasil += "\nAngka " + angka + " bukan Bilangan Prima.";
     }
 
-
+    // Menampilkan semua hasil dalam satu pesan dialog
+    JOptionPane.showMessageDialog(this, hasil, "Hasil Analisis Angka", JOptionPane.INFORMATION_MESSAGE);
+} catch (NumberFormatException ex) {
+    JOptionPane.showMessageDialog(this, "Harap masukkan angka yang valid.", "Error", JOptionPane.ERROR_MESSAGE);
+}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
