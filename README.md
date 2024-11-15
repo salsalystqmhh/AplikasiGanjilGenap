@@ -50,7 +50,7 @@ Aplikasi Ganjil Genap menawarkan fitur-fitur berikut:
 - **isPrima**: Metode untuk memeriksa apakah angka yang dimasukkan adalah bilangan prima.
 
 ## Demo
-
+![Demo GIF](img/tugas1.gif)
 
 note : Aplikasi ini dirancang untuk memudahkan pengguna dalam mengecek apakah suatu angka adalah ganjil/genap dan bilangan prima dengan cepat dan sederhana.
 
